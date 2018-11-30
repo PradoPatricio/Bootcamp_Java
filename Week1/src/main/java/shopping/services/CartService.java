@@ -26,10 +26,11 @@ public class CartService {
             return new ArrayList<>(allCarts.values());
         }
         public Cart addNewCart(Cart cart) {
-            if (cart != null) {
-                cart.setId(CartCount.incrementAndGet());
-                allCarts.put(cart.getId(), cart);	
+            if (cart == null) {
+                cart=new Cart();                
             }
+            cart.setId(CartCount.incrementAndGet());
+            allCarts.put(cart.getId(), cart);	
             return cart;	
         }
         public Cart deleteCart(long id) {        

@@ -25,7 +25,7 @@ import shopping.services.ProductService;
 
 @RestController
 public class ProductController{
-   
+    @Autowired
     private ProductService products_s;  
    
 

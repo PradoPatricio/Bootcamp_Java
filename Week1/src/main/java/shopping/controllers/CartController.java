@@ -28,8 +28,9 @@ import shopping.models.Cart;
 
 @RestController
 public class CartController {    
-    
+    @Autowired
     private CartService cart_s;
+    @Autowired
     private ProductService product_s;
 
     //Cart mapping

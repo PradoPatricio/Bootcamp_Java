@@ -9,19 +9,18 @@ import java.util.Map;
 public class Cart {
     private long id;
     private Map<Long,CartElement> shopList;
+    private String name;
 
     public Cart(){
-
+        this.shopList=new HashMap<Long,CartElement>();
+    }
+    public String getName(){
+        return name;
     }
 
-    public double getTotalAmount() {
-        double totalAmount =0;
-        for (CartElement i : shopList.values()) {
-            totalAmount+=i.getTotalAmount();
-        }
-        return totalAmount;
+	public void setName(String name){
+        this.name=name;
     }
-
     public List<CartElement> getShopList(){
         return new ArrayList<>(shopList.values());
     }

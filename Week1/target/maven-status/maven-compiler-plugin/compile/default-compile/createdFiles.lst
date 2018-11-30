@@ -1,0 +1,9 @@
+shopping\services\CartService.class
+shopping\ShopApplication.class
+shopping\controllers\CartController.class
+shopping\SwaggerConfig.class
+shopping\controllers\ProductController.class
+shopping\models\Cart.class
+shopping\models\Product.class
+shopping\services\ProductService.class
+shopping\models\CartElement.class

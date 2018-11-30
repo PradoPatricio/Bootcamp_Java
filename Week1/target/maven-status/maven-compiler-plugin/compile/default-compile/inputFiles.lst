@@ -1,5 +1,9 @@
+C:\Bootcamp_Java\Week1\src\main\java\shopping\services\CartService.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\services\ProductService.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\controllers\CartController.java
 C:\Bootcamp_Java\Week1\src\main\java\shopping\ShopApplication.java
-C:\Bootcamp_Java\Week1\src\main\java\shopping\model\CartElement.java
-C:\Bootcamp_Java\Week1\src\main\java\shopping\model\Item.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\models\Cart.java
 C:\Bootcamp_Java\Week1\src\main\java\shopping\SwaggerConfig.java
-C:\Bootcamp_Java\Week1\src\main\java\shopping\controllers\ShopController.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\models\CartElement.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\models\Product.java
+C:\Bootcamp_Java\Week1\src\main\java\shopping\controllers\ProductController.java

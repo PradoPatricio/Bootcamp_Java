@@ -1,32 +1,34 @@
-package shopping.model;
+package shopping.models;
 
 public class CartElement {
     private long id;
-    private Item item;
+    private Product product;
     private int quantity;
 
     public CartElement(){
 
     }
-    public CartElement(long id,Item item, int quantity) {
+    public CartElement(long id,Product product, int quantity) {
         this.id = id;
-        this.item = item;
+        this.product = product;
         this.quantity = quantity;
     }
-
+    public double getTotalAmount() {
+        return this.product.getPrice()*quantity;
+    }
     public int getQuantity() {
         return quantity;
     }
 
-    public Item getItem() {
-        return item;
+    public Product getItem() {
+        return product;
     }
 
     public long getId(){
         return id;
     }
-    public void setItem(Item item){
-        this.item=item;
+    public void setItem(Product product){
+        this.product=product;
     }
 
 	public void setId(long id) {

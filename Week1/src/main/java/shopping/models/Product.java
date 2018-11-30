@@ -1,14 +1,14 @@
-package shopping.model;
+package shopping.models;
 
-public class Item {
+public class Product {
     private  long id;
     private  String name;
     private  double price;
 
-    public Item(){
+    public Product(){
         
     }
-    public Item(long id,String name, Double price) {
+    public Product(long id,String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;

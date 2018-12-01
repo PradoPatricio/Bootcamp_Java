@@ -5,6 +5,7 @@ package shopping.services;
     import java.util.HashMap;
     import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shopping.models.Product;
@@ -15,6 +16,7 @@ import shopping.models.Product;
 public class CartService {
         private AtomicLong CartCount = new AtomicLong();
         private AtomicLong ElementCount =new AtomicLong();
+        
         private Map<Long,Cart> allCarts = new HashMap<>(); //map allow easy access to CartElements 
         
         

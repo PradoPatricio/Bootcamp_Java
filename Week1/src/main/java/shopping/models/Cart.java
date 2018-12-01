@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class Cart {
     private long id;
-    private Map<Long,CartElement> shopList;
     private String name;
-
+    private Map<Long,CartElement> shopList;
+   
     public Cart(){
         this.shopList=new HashMap<Long,CartElement>();
     }

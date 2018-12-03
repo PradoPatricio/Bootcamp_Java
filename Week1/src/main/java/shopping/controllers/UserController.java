@@ -20,6 +20,7 @@ public class UserController<UsuarioRepo> {
 
     @Autowired
     private UserService user_s;
+    
 
     @PostMapping("/user")
     public User newUser(@RequestBody User user) {

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ch.qos.logback.core.joran.conditional.ElseAction;
 import shopping.models.CartElement;
 import shopping.models.Product;
+import shopping.models.User;
 import shopping.services.CartService;
 import shopping.services.ProductService;
 import shopping.models.Cart;
@@ -60,6 +61,11 @@ public class CartController {
         public Cart deleteCart(@PathVariable("id") long  Id){
            return cart_s.deleteCart(Id);
         }
+
+    @GetMapping("/cart/{id}/user")
+    public User getCartUser(@PathVariable("id") long id){
+        return cart_s.getCartUser(id);
+    }
     
     //Elements Mapping
 

@@ -1,6 +1,13 @@
 package shopping.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue
     private  long id;
     private  String name;
     private  double price;
@@ -8,8 +15,7 @@ public class Product {
     public Product(){
         
     }
-    public Product(long id,String name, Double price) {
-        this.id = id;
+    public Product(String name, Double price) {
         this.name = name;
         this.price = price;
     }

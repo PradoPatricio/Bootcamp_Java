@@ -6,21 +6,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 public class Cart {
     private long id;
-    private String name;
+    @ManyToOne
+    private User user;
+    @ManyToMany
     private Map<Long,CartElement> shopList;
    
     public Cart(){
         this.shopList=new HashMap<Long,CartElement>();
     }
-    public String getName(){
-        return name;
+  
+    public void setUser(User user){
+        this.user=user;
     }
-
-	public void setName(String name){
-        this.name=name;
+    public User getUser(){
+        return user;
     }
+	
     public List<CartElement> getShopList(){
         return new ArrayList<>(shopList.values());
     }

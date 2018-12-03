@@ -1,15 +1,23 @@
 package shopping.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class CartElement {
+    @Id
+    @GeneratedValue
     private long id;
+    @ManyToMany
     private Product product;
     private int quantity;
 
     public CartElement(){
 
     }
-    public CartElement(long id,Product product, int quantity) {
-        this.id = id;
+    public CartElement(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }

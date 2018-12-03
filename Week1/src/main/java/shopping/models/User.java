@@ -2,6 +2,10 @@ package shopping.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +19,11 @@ public class User {
     @GeneratedValue
     private long id;
     private String name;
+    @OneToMany
+    private List<Cart> userCarts;
 
     public User() {
+        this.userCarts=new ArrayList<Cart>();
     }
 
     public User(String name) {

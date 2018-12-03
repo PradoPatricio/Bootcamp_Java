@@ -4,7 +4,6 @@ package shopping.services;
     import java.util.Map;
     import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,26 +11,19 @@ import org.springframework.stereotype.Service;
 import shopping.models.Product;
 import shopping.models.User;
 import shopping.repositories.CartRepo;
-import shopping.repositories.ProductRepo;
-import shopping.repositories.UserRepo;
-import shopping.repositories.ElementRepo;
 import shopping.models.CartElement;
-    import shopping.models.Cart;    
-    import static java.lang.Math.toIntExact;
+import shopping.models.Cart;    
 
 @Service
 public class CartService {
         
         @Autowired
         private CartRepo cartRepo;
-        @Autowired
-        private ProductRepo productRepo;
-        @Autowired
-        private ElementRepo elementRepo;
+      
         
         //cart CRUD
         public Cart getCartById(long id) {
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             Cart cart = findCart(intId);
             if(cart!=null){
                 return cart;
@@ -49,7 +41,7 @@ public class CartService {
             return cart;	
         }
         public Cart deleteCart(long id) {  
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             Cart cart = findCart(intId);
             if(cart!=null){
                 cartRepo.delete(cart);
@@ -58,7 +50,7 @@ public class CartService {
             throw new IllegalArgumentException();
         }
         public Cart editCart(long id,Cart cart){
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             Cart oldCart = findCart(intId);
             if(oldCart!=null){
                 cartRepo.delete(oldCart);
@@ -68,7 +60,7 @@ public class CartService {
         }
         
         public User getCartUser(long id){
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             if (cartRepo.existsById(intId)){
                 return findCart(intId).getUser();
             }
@@ -76,7 +68,7 @@ public class CartService {
         }
         //Cart elements CRUD
         public List<CartElement> getCartElements(long id) {		
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             if (cartRepo.existsById(intId)){
                 return findCart(intId).getShopList();
             }
@@ -84,7 +76,7 @@ public class CartService {
         }
            
         public CartElement addElementToCart(long cartId,Product product, int quantity){
-            int intId = toIntExact(cartId);
+            int intId = (int)(cartId);
             if (cartRepo.existsById(intId)){
             CartElement newCartElement=new CartElement(product,quantity);
             findCart(intId).addToCart(newCartElement);
@@ -97,7 +89,7 @@ public class CartService {
             
         
         public CartElement removeElementFromCart(long cartId,long elementId){
-            int intId = toIntExact(cartId);
+            int intId = (int)(cartId);
             CartElement deleted= findCart(intId).deleteElement(elementId);
             return deleted;
         }

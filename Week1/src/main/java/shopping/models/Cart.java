@@ -2,17 +2,20 @@ package shopping.models;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.ManyToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 public class Cart {
+    @Id
+    @GeneratedValue
     private long id;
     @ManyToOne
+    @JoinColumn(name="user_id")
     private User user;
     @OneToMany
     private List<CartElement> shopList;
@@ -50,7 +53,7 @@ public class Cart {
             if (x.getId()==id) {
                 CartElement deleted =x;
                 shopList.remove(x);   
-                return x;             
+                return deleted;             
             }
        }
         return null;

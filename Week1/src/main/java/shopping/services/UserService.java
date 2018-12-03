@@ -1,10 +1,6 @@
 package shopping.services;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
-import static java.lang.Math.toIntExact;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +20,7 @@ public class UserService {
         
         //User CRUD
         public User getUserById(long id) {
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             User user = userRepo.findById(intId).get();
             if(user!=null){
                 return user;
@@ -45,7 +41,7 @@ public class UserService {
             return user;	
         }
         public User deleteUser(long id) {    
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             if(userRepo.existsById(intId))  {
                 User user = userRepo.findById(intId).get();
             userRepo.deleteById(intId);
@@ -58,7 +54,7 @@ public class UserService {
             
         }
         public User editUser(long id,User user){
-            int intId = toIntExact(id);
+            int intId = (int)(id);
             if(userRepo.existsById(intId))  {
                 userRepo.deleteById(intId);
                 userRepo.save(user);

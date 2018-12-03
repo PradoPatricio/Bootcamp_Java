@@ -1,6 +1,6 @@
 package shopping.controllers;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -32,9 +32,9 @@ public class ProductController{
 
     
     @GetMapping("/product")
-    public ArrayList<Product> getProducts(){
-        ArrayList<Product> products = products_s.getProducts();
-		return products;
+    public List<Product> getProducts(){
+        return products_s.getProducts();
+		
     }
     @GetMapping("/product/{id}")
     public Product getProductById(@PathVariable("id") long  productId){

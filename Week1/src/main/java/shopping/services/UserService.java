@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import static java.lang.Math.toIntExact;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shopping.models.User;
@@ -15,7 +16,7 @@ import shopping.repositories.UserRepo;
 public class UserService {
       
         
-        
+        @Autowired
         private UserRepo userRepo;
         
 

@@ -1,6 +1,6 @@
 package shopping.controllers;
 
-import java.awt.List;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -36,13 +36,13 @@ public class CartController {
 
     //Cart mapping
     @GetMapping("/cart/{id}")
-    public ArrayList<CartElement> getCartElements(@PathVariable("id") long  Id){
+    public List<CartElement> getCartElements(@PathVariable("id") long  Id){
         return cart_s.getCartElements(Id); 
     }
     
 
     @GetMapping("/cart")                                                        
-    public ArrayList<Cart> getAllCarts(){
+    public List<Cart> getAllCarts(){
         return cart_s.getCarts();
     }
 

@@ -8,16 +8,17 @@ import java.util.Map;
 
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 public class Cart {
     private long id;
     @ManyToOne
     private User user;
-    @ManyToMany
-    private Map<Long,CartElement> shopList;
+    @OneToMany
+    private List<CartElement> shopList;
    
     public Cart(){
-        this.shopList=new HashMap<Long,CartElement>();
+        this.shopList=new ArrayList<CartElement>();
     }
   
     public void setUser(User user){
@@ -28,7 +29,7 @@ public class Cart {
     }
 	
     public List<CartElement> getShopList(){
-        return new ArrayList<>(shopList.values());
+        return shopList;
     }
     public long getId(){
         return id;
@@ -39,16 +40,18 @@ public class Cart {
     }
     public CartElement addToCart(CartElement element) {
 		if (shopList == null) {
-			shopList = new HashMap<Long,CartElement>();
+			shopList = new ArrayList<CartElement>();
 		}
-        shopList.put(element.getId(),element);
+        shopList.add(element);
         return element;
     }
     public CartElement deleteElement(long id){
-       if(shopList.containsKey(id)){
-        CartElement deleted =shopList.get(id);
-        shopList.remove(id);
-        return deleted;
+        for (CartElement x : shopList) {
+            if (x.getId()==id) {
+                CartElement deleted =x;
+                shopList.remove(x);   
+                return x;             
+            }
        }
         return null;
         

@@ -1,5 +1,6 @@
 package shopping.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +10,9 @@ public class Product {
     @Id
     @GeneratedValue
     private  long id;
+    @Column
     private  String name;
+    @Column
     private  double price;
 
     public Product(){

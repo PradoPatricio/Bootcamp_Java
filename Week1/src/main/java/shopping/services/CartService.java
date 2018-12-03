@@ -22,9 +22,11 @@ import shopping.models.CartElement;
 @Service
 public class CartService {
         
-        
+        @Autowired
         private CartRepo cartRepo;
+        @Autowired
         private ProductRepo productRepo;
+        @Autowired
         private ElementRepo elementRepo;
         
         //cart CRUD
@@ -82,11 +84,21 @@ public class CartService {
         }
            
         public CartElement addElementToCart(long cartId,Product product, int quantity){
-            CartElement newElement= new CartElement(product,quantity);
-            
+            int intId = toIntExact(cartId);
+            if (cartRepo.existsById(intId)){
+            CartElement newCartElement=new CartElement(product,quantity);
+            findCart(intId).addToCart(newCartElement);
+            return newCartElement;
+            }
+            else{
+                throw new IllegalArgumentException();
+            }            
         }
+            
+        
         public CartElement removeElementFromCart(long cartId,long elementId){
-           CartElement deleted= allCarts.get(cartId).deleteElement(elementId);
+            int intId = toIntExact(cartId);
+            CartElement deleted= findCart(intId).deleteElement(elementId);
             return deleted;
         }
 

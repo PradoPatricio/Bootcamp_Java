@@ -1,0 +1,16 @@
+shopping\models\User.class
+shopping\repositories\CartRepo.class
+shopping\controllers\CartController.class
+shopping\models\Product.class
+shopping\services\ProductService.class
+shopping\repositories\ElementRepo.class
+shopping\repositories\UserRepo.class
+shopping\services\CartService.class
+shopping\services\UserService.class
+shopping\ShopApplication.class
+shopping\SwaggerConfig.class
+shopping\controllers\ProductController.class
+shopping\models\Cart.class
+shopping\controllers\UserController.class
+shopping\repositories\ProductRepo.class
+shopping\models\CartElement.class

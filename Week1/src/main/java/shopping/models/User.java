@@ -1,6 +1,7 @@
 package shopping.models;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -13,17 +14,15 @@ import javax.persistence.Entity;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
     @Column
     private String name;
-    @OneToMany
-    private List<Cart> userCarts;
 
-    public User() {
-        this.userCarts=new ArrayList<Cart>();
+
+    public User(){
+
     }
-
     public User(String name) {
         this.name = name;
 

@@ -1,8 +1,5 @@
 package shopping.services;
 
-    import java.util.ArrayList;
-    import java.util.Map;
-    import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

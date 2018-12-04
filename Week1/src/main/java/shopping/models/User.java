@@ -3,11 +3,8 @@ package shopping.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -18,6 +15,9 @@ public class User {
     private long id;
     @Column
     private String name;
+    @OneToOne
+    @JoinColumn(name="cart_id")
+    Cart cart;
 
 
     public User(){

@@ -4,43 +4,56 @@ package shopping.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
+@Entity
 public class Cart {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-    @OneToMany
+    @ManyToMany
     private List<CartElement> shopList;
    
     public Cart(){
-        this.shopList=new ArrayList<CartElement>();
+        
     }
-  
+    public Cart(Long id,User user){
+        this.id=id;
+        this.user=user;
+        this.shopList=new ArrayList<>();
+        
+    }
+
+    public void setId(long id) {
+        this.id=id;
+    }
+    public long getId(){
+        return id;
+    }
     public void setUser(User user){
         this.user=user;
     }
     public User getUser(){
         return user;
     }
-	
+    public void setShopList(List<CartElement> shopList){
+        this.shopList=shopList;
+    }
     public List<CartElement> getShopList(){
         return shopList;
     }
-    public long getId(){
-        return id;
-    }
+   
 
-	public void setId(long id) {
-        this.id=id;
-    }
+	
     public CartElement addToCart(CartElement element) {
 		if (shopList == null) {
 			shopList = new ArrayList<CartElement>();
@@ -59,4 +72,7 @@ public class Cart {
         return null;
         
     }
+
+
+   
 }

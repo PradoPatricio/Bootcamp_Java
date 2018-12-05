@@ -36,19 +36,19 @@ public class UserController<UsuarioRepo> {
 
    
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable("id") int id) {
+    public User getUserById(@PathVariable("id") Long id) {
        return user_s.getUserById(id);
     }
 
     
     @PutMapping("/user/{id}")
-    public User editUser(@PathVariable("id") int id,@RequestBody User user){
+    public User editUser(@PathVariable("id") Long id,@RequestBody User user){
         return user_s.editUser(id, user);       
     }
 
 
     @DeleteMapping("/user/{id}")
-    public User deleteUsuario(@PathVariable("id") int id){
+    public User deleteUsuario(@PathVariable("id") Long id){
         return user_s.deleteUser(id);
     }
 }

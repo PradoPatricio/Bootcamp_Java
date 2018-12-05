@@ -12,12 +12,10 @@ import javax.persistence.Entity;
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
-    @Column
+    @Column(name = "user_id")
+    private Long id;
+    @Column(name = "user_name")
     private String name;
-    @OneToOne
-    @JoinColumn(name="cart_id")
-    Cart cart;
 
 
     public User(){
@@ -36,11 +34,11 @@ public class User {
         this.name = name;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

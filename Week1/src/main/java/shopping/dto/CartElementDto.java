@@ -1,4 +1,4 @@
-package shopping.models;
+package shopping.dto;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,47 +10,35 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
-@Entity
-public class CartElement {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="element_id")
+
+public class CartElementDto {
+   
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    Cart cart;
-
-    @Column(name = "product_quantity")
+    private ProductDto product;
+    CartDto cart;    
     private int quantity;
  
 
-    public CartElement(){
+    public CartElementDto(){
 
     }
-    public CartElement(Product product, int quantity) {
+    public CartElementDto(ProductDto product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
-    public double getTotalAmount() {
-        return this.product.getPrice()*quantity;
-    }
+   
     public int getQuantity() {
         return quantity;
     }
 
-    public Product getProduct() {
+    public ProductDto getProduct() {
         return product;
     }
 
     public Long getId(){
         return id;
     }
-    public void setProduct(Product product){
+    public void setProduct(ProductDto product){
         this.product=product;
     }
 

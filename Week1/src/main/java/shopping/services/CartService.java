@@ -2,12 +2,15 @@ package shopping.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import shopping.models.Product;
 import shopping.models.User;
 import shopping.repositories.CartRepo;
+import shopping.repositories.UserRepo;
 import shopping.models.CartElement;
 import shopping.models.Cart;    
 
@@ -16,12 +19,13 @@ public class CartService {
         
         @Autowired
         private CartRepo cartRepo;
+        @Autowired
+        UserRepo userRepo;
       
         
         //cart CRUD
-        public Cart getCartById(long id) {
-            int intId = (int)(id);
-            Cart cart = findCart(intId);
+        public Cart getCartById(Long id) {
+            Cart cart = cartRepo.findCartById(id);
             if(cart!=null){
                 return cart;
             }
@@ -30,16 +34,19 @@ public class CartService {
         public List<Cart> getCarts(){
             return cartRepo.findAll();
         }
-        public Cart addNewCart(Cart cart) {
-            if (cart == null) {
-                cart=new Cart();                
-            }
-            cartRepo.save(cart);	
-            return cart;	
+        public Cart addNewCart(long userId,Cart cart) {
+
+            if(userRepo.existsById((int)userId)){
+                if (cart == null) {
+                    cart=new Cart();                
+                }
+                cartRepo.save(cart);	
+                return cart;
+            }           
+            else throw new IllegalArgumentException();        
         }
         public Cart deleteCart(long id) {  
-            int intId = (int)(id);
-            Cart cart = findCart(intId);
+            Cart cart = cartRepo.findCartById(id);
             if(cart!=null){
                 cartRepo.delete(cart);
                 return cart;

@@ -10,4 +10,5 @@ import shopping.models.Cart;
 @Component
 public interface CartRepo extends CrudRepository<Cart, Integer> {
     List<Cart> findAll();
+    Cart findCartById(Long id);
 }

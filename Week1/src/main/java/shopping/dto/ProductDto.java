@@ -1,26 +1,16 @@
-package shopping.models;
+package shopping.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
-public class Product {
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "product_id")
+
+public class ProductDto {
     private  Long id;
-    @Column(name = "product_name")
     private  String name;
-    @Column(name = "product_price")
     private  double price;
 
-    public Product(){
+    public ProductDto(){
         
     }
-    public Product(String name, Double price) {
+    public ProductDto(String name, Double price) {
         this.name = name;
         this.price = price;
     }

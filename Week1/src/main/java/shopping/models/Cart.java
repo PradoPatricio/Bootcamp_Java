@@ -4,6 +4,7 @@ package shopping.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,16 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
 public class Cart {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    @Column(name="cart_id")
+    private Long id;
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-    @ManyToMany
+    @OneToMany
+    @JoinColumn(name="element_id")
     private List<CartElement> shopList;
    
     public Cart(){
@@ -33,10 +37,10 @@ public class Cart {
         
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id=id;
     }
-    public long getId(){
+    public Long getId(){
         return id;
     }
     public void setUser(User user){

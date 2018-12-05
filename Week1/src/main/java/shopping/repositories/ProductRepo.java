@@ -9,5 +9,7 @@ import shopping.models.Product;
 
 @Component
 public interface ProductRepo extends CrudRepository<Product, Integer> {
-    List<Product> findAll();
+    List<Product> findAll();    
+    Product findById(Long id);
+    Boolean existsById(Long id);
 }

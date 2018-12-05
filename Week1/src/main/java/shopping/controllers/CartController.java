@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import shopping.models.CartElement;
@@ -28,7 +29,7 @@ public class CartController {
 
     //Cart mapping
     @GetMapping("/cart/{id}")
-    public List<CartElement> getCartElements(@PathVariable("id") long  Id){
+    public List<CartElement> getCartElements(@PathVariable("id") Long Id){
         return cart_s.getCartElements(Id); 
     }
     
@@ -38,24 +39,24 @@ public class CartController {
         return cart_s.getCarts();
     }
 
-    @PostMapping("/cart")                                             //new cart
-    public Cart newCart(@RequestBody Cart cart){ 
-        cart_s.addNewCart(cart);
+    @PostMapping("/cart/{id}")                                             //new cart
+    public Cart newCart(@PathVariable("id") Long userId,@RequestBody Cart cart){ 
+        cart_s.addNewCart(userId,cart);
         return cart;
     }
     @PutMapping("/cart/{id}")                                           //edit cart
-    public Cart editCart(@PathVariable("id") long  Id,@RequestBody Cart cart){ 
+    public Cart editCart(@PathVariable("id") Long  Id,@RequestBody Cart cart){ 
         cart_s.editCart(Id,cart);
         return cart;
     }
 
     @DeleteMapping("/cart/{id}")
-        public Cart deleteCart(@PathVariable("id") long  Id){
+        public Cart deleteCart(@PathVariable("id") Long  Id){
            return cart_s.deleteCart(Id);
         }
 
     @GetMapping("/cart/{id}/user")
-    public User getCartUser(@PathVariable("id") long id){
+    public User getCartUser(@PathVariable("id") Long id){
         return cart_s.getCartUser(id);
     }
     
@@ -63,11 +64,11 @@ public class CartController {
 
     
     @PutMapping("/cart/{c_id}/element/{p_id}/{quantity}")
-    public CartElement addElementToCart(@PathVariable("c_id") long  CartId,@PathVariable("p_id")long  ProductId,@PathVariable("quantity") int quantity){
+    public CartElement addElementToCart(@PathVariable("c_id") Long CartId,@PathVariable("p_id")Long  ProductId,@PathVariable("quantity") int quantity){
        return cart_s.addElementToCart(CartId, product_s.getProductById(ProductId), quantity);       
     }
     @DeleteMapping("/cart/{c_id}/element{p_id}")
-        public CartElement removeElementFromCart(@PathVariable("c_id") long  CartId,@PathVariable("e_id")long ElementId ){
+        public CartElement removeElementFromCart(@PathVariable("c_id") Long  CartId,@PathVariable("e_id")Long ElementId ){
            return cart_s.removeElementFromCart(CartId,ElementId);
         }
     }

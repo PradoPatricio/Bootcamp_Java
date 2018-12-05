@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import shopping.models.Product;
 import shopping.repositories.ProductRepo;
+
 @Service
 public class ProductService {
 
@@ -16,8 +17,7 @@ public class ProductService {
 	
 
 	public Product getProductById(long id) {
-        int intId = (int)(id);
-        Product product = productRepo.findById(intId).get();
+        Product product = productRepo.findById(id);
         if(product!=null){
             return product;
         }
@@ -37,10 +37,10 @@ public class ProductService {
     }
 
 	public Product deleteProduct(long id) {        
-        int intId = (int)(id);
-        if(productRepo.existsById(intId))  {
-            Product product = productRepo.findById(intId).get();
-            productRepo.deleteById(intId);
+      
+        if(productRepo.existsById(id))  {
+            Product product = productRepo.findById(id);
+            productRepo.delete(product);
         return product;
         }
         else{
@@ -49,9 +49,10 @@ public class ProductService {
     }
 
     public Product editProduct(long id,Product product){
-        int intId = (int)(id);
-            if(productRepo.existsById(intId))  {
-                productRepo.deleteById(intId);
+       
+            if(productRepo.existsById(id))  {
+                Product oldProduct = productRepo.findById(id);
+                productRepo.delete(oldProduct);
                 productRepo.save(product);
             return product;
             }

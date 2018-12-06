@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import shopping.models.Product;
 import shopping.models.User;
 import shopping.repositories.CartRepo;
+import shopping.repositories.ElementRepo;
+import shopping.repositories.ProductRepo;
 import shopping.repositories.UserRepo;
 import shopping.models.CartElement;
 import shopping.models.Cart;    
@@ -21,11 +23,15 @@ public class CartService {
         private CartRepo cartRepo;
         @Autowired
         UserRepo userRepo;
+        @Autowired
+        ElementRepo elementRepo;
+        @Autowired
+        ProductRepo productRepo;
       
         
         //cart CRUD
         public Cart getCartById(Long id) {
-            Cart cart = cartRepo.findCartById(id);
+            Cart cart = cartRepo.findById(id);
             if(cart!=null){
                 return cart;
             }
@@ -34,57 +40,61 @@ public class CartService {
         public List<Cart> getCarts(){
             return cartRepo.findAll();
         }
-        public Cart addNewCart(long userId,Cart cart) {
-
-            if(userRepo.existsById((int)userId)){
+        public Cart addNewCart(Cart cart) {
                 if (cart == null) {
                     cart=new Cart();                
                 }
-                cartRepo.save(cart);	
-                return cart;
-            }           
-            else throw new IllegalArgumentException();        
-        }
+                return cartRepo.save(cart);	               
+            }   
         public Cart deleteCart(long id) {  
-            Cart cart = cartRepo.findCartById(id);
+            Cart cart =cartRepo.findById(id);
             if(cart!=null){
                 cartRepo.delete(cart);
                 return cart;
             }
             throw new IllegalArgumentException();
         }
+        /*
         public Cart editCart(long id,Cart cart){
-            int intId = (int)(id);
-            Cart oldCart = findCart(intId);
+            Cart oldCart = cartRepo.findById(id);
             if(oldCart!=null){
                 cartRepo.delete(oldCart);
                 return cart;
             }
             throw new IllegalArgumentException();
         }
-        
-        public User getCartUser(long id){
-            int intId = (int)(id);
-            if (cartRepo.existsById(intId)){
-                return findCart(intId).getUser();
+        */
+
+
+        public Cart setCartUser(Long id,Long userId){
+            if ((cartRepo.existsById(id))&&(userRepo.existsById(userId))) {
+                Cart myCart= cartRepo.findById(id);
+                myCart.setUser(userRepo.findById(userId));
+                return cartRepo.save(myCart);                
+            }
+            throw new IllegalArgumentException();
+        }
+        public User getCartUser(Long id){
+            if (cartRepo.existsById(id)){
+                return cartRepo.findById(id).getUser();
             }
             throw new IllegalArgumentException();
         }
         //Cart elements CRUD
-        public List<CartElement> getCartElements(long id) {		
-            int intId = (int)(id);
-            if (cartRepo.existsById(intId)){
-                return findCart(intId).getShopList();
+        public List<CartElement> getCartElements(Long id) {		           
+            if (cartRepo.existsById(id)){
+                return cartRepo.findById(id).getShopList();
             }
             throw new IllegalArgumentException();
         }
            
-        public CartElement addElementToCart(long cartId,Product product, int quantity){
-            int intId = (int)(cartId);
-            if (cartRepo.existsById(intId)){
-            CartElement newCartElement=new CartElement(product,quantity);
-            findCart(intId).addToCart(newCartElement);
-            return newCartElement;
+        public Cart addElementToCart(Long cartId,Long productId, int quantity){           
+            if ((cartRepo.existsById(cartId))&&(productRepo.existsById(productId))){                
+            CartElement newCartElement=new CartElement(productRepo.findById(productId),quantity);
+            newCartElement=elementRepo.save(newCartElement);
+            Cart myCart= cartRepo.findById(cartId);
+            myCart.addToCart(newCartElement);
+            return cartRepo.save(myCart);          
             }
             else{
                 throw new IllegalArgumentException();
@@ -93,12 +103,10 @@ public class CartService {
             
         
         public CartElement removeElementFromCart(long cartId,long elementId){
-            int intId = (int)(cartId);
-            CartElement deleted= findCart(intId).deleteElement(elementId);
+           
+            CartElement deleted=  cartRepo.findById(cartId).deleteElement(elementId);
             return deleted;
         }
 
-        private Cart findCart(int id){
-            return cartRepo.findById(id).get();
-        }
+       
     }

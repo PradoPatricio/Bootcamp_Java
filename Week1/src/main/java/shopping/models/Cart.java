@@ -23,8 +23,7 @@ public class Cart {
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-    @OneToMany
-    @JoinColumn(name="element_id")
+    @ManyToMany
     private List<CartElement> shopList;
    
     public Cart(){

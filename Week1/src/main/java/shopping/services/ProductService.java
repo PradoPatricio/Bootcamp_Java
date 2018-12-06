@@ -32,8 +32,8 @@ public class ProductService {
         if (product == null) {
             product=new Product();                
         }        
-        productRepo.save(product);	
-        return product;
+        return productRepo.save(product);	
+       
     }
 
 	public Product deleteProduct(long id) {        
@@ -41,7 +41,7 @@ public class ProductService {
         if(productRepo.existsById(id))  {
             Product product = productRepo.findById(id);
             productRepo.delete(product);
-        return product;
+            return product;
         }
         else{
             throw new IllegalArgumentException();

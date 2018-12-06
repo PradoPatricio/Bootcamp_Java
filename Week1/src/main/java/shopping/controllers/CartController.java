@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import shopping.models.CartElement;
 import shopping.models.User;
 import shopping.services.CartService;
-import shopping.services.ProductService;
 import shopping.dto.CartDto;
 import shopping.dto.CartElementDto;
 import shopping.dto.UserDto;
@@ -28,8 +27,6 @@ import shopping.models.Cart;
 public class CartController {    
     @Autowired
     private CartService cart_s;
-    @Autowired
-    private ProductService product_s;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -45,14 +42,21 @@ public class CartController {
         return convertToDto(cart_s.getCarts());
     }
 
+
+    @PutMapping("/cart/{id}/user/{user_id}")  
+    public CartDto setCartUser(@PathVariable("id") Long id, @PathVariable("user_id") Long userId) {
+        return convertToDto(cart_s.setCartUser(id, userId));
+    }
+
+
     @GetMapping("/cart/{id}/user")
     public UserDto getCartUser(@PathVariable("id") Long id){       
         return modelMapper.map(cart_s.getCartUser(id), UserDto.class);
     }
 
-    @PostMapping("/cart/{id}")                                             //new cart
-    public CartDto newCart(@PathVariable("id") Long userId,@RequestBody CartDto cartDto){ 
-        Cart newCart=cart_s.addNewCart(userId,convertToEntity(cartDto));
+    @PostMapping("/cart")                                             //new cart
+    public CartDto newCart(@RequestBody CartDto cartDto){ 
+        Cart newCart=cart_s.addNewCart(convertToEntity(cartDto));
         return convertToDto(newCart);
     }
    
@@ -81,12 +85,11 @@ public class CartController {
         return convertToDto(cart_s.removeElementFromCart(CartId,ElementId));
     }
         
-   /*
+   
     @PutMapping("/cart/{c_id}/element/{p_id}/{quantity}")
-    public CartElementDto addElementToCart(@PathVariable("c_id") Long CartId,@PathVariable("p_id")Long  ProductId,@PathVariable("quantity") int quantity){
-       return cart_s.addElementToCart(CartId, product_s.getProductById(ProductId), quantity);       
+    public CartDto addElementToCart(@PathVariable("c_id") Long CartId,@PathVariable("p_id")Long  ProductId,@PathVariable("quantity") int quantity){
+       return convertToDto(cart_s.addElementToCart(CartId, ProductId, quantity));       
     }
-    */
 
 
 

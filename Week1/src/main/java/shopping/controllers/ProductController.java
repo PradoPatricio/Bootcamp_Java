@@ -40,7 +40,7 @@ public class ProductController{
     @PostMapping("/product")
     public ProductDto newProduct(@RequestBody ProductDto product){ 
         Product newProduct=products_s.addNewProduct(convertToEntity(product));
-        return  product;
+        return convertToDto(newProduct);
     }
   
     

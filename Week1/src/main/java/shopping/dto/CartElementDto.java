@@ -1,13 +1,5 @@
 package shopping.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 
 
@@ -22,30 +14,40 @@ public class CartElementDto {
     public CartElementDto(){
 
     }
-    public CartElementDto(ProductDto product, int quantity) {
+    public CartElementDto(ProductDto product, int quantity,Long id,CartDto cart) {
+        this.id=id;
         this.product = product;
         this.quantity = quantity;
-    }
-   
-    public int getQuantity() {
-        return quantity;
+        this.cart=cart;
     }
 
-    public ProductDto getProduct() {
-        return product;
+    public void setId(Long id) {
+        this.id=id;
     }
-
     public Long getId(){
         return id;
     }
+    
+     
     public void setProduct(ProductDto product){
         this.product=product;
     }
 
-	public void setId(Long id) {
-        this.id=id;
-    }
+    public ProductDto getProduct() {
+        return product;
+    }  
+	
     public void setQuantity(int quantity){
         this.quantity=quantity;
+    }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setCart(CartDto cart){
+        this.cart=cart;
+    }
+    public CartDto getCart(){
+        return cart;
     }
 }

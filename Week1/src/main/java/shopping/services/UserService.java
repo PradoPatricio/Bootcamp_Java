@@ -2,6 +2,8 @@ package shopping.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +32,14 @@ public class UserService {
         public List<User> getUsers(){
             return userRepo.findAll();
         }
-        
+        @Transactional
         public User addNewUser(User user) {
             if (user == null) {
                 user=new User();                
             }
             
-            userRepo.save(user);	
-            return user;	
+           return userRepo.save(user);	
+            
         }
         public User deleteUser(long id) {    
             

@@ -5,5 +5,5 @@ import shopping.models.CartElement;
 
 
 @Component
-public interface ElementRepo extends CrudRepository<CartElement, Integer> {
+public interface ElementRepo extends CrudRepository<CartElement, Long> {
 }

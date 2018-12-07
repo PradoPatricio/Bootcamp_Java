@@ -17,7 +17,7 @@ public class ProductService {
 	
 
 	public Product getProductById(long id) {
-        Product product = productRepo.findById(id);
+        Product product = this.productRepo.findById(id).get();
         if(product!=null){
             return product;
         }
@@ -25,22 +25,22 @@ public class ProductService {
     }
     
     public List<Product> getProducts() {		
-		return productRepo.findAll();	
+		return  (List<Product>)this.productRepo.findAll();	
     }
 
     public Product addNewProduct(Product product) {
         if (product == null) {
             product=new Product();                
         }        
-        return productRepo.save(product);	
+        return this.productRepo.save(product);	
        
     }
 
 	public Product deleteProduct(long id) {        
       
-        if(productRepo.existsById(id))  {
-            Product product = productRepo.findById(id);
-            productRepo.delete(product);
+        if(this.productRepo.existsById(id))  {
+            Product product = this.productRepo.findById(id).get();
+            this.productRepo.delete(product);
             return product;
         }
         else{
@@ -50,10 +50,10 @@ public class ProductService {
 
     public Product editProduct(long id,Product product){
        
-            if(productRepo.existsById(id))  {
-                Product oldProduct = productRepo.findById(id);
-                productRepo.delete(oldProduct);
-                productRepo.save(product);
+            if(this.productRepo.existsById(id))  {
+                Product oldProduct = this.productRepo.findById(id).get();
+                this.productRepo.delete(oldProduct);
+                this.productRepo.save(product);
             return product;
             }
             else{

@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 
 @Entity
@@ -17,14 +16,15 @@ public class CartElement {
     @Column(name="element_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
     Cart cart;
-
+    @Column(name = "product_name")
+    String name;
     @Column(name = "product_quantity")
     private int quantity;
  
@@ -35,6 +35,7 @@ public class CartElement {
     public CartElement(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
+        this.name=product.getname();
     }
     public double getTotalAmount() {
         return this.product.getPrice()*quantity;
@@ -61,3 +62,5 @@ public class CartElement {
         this.quantity=quantity;
     }
 }
+
+

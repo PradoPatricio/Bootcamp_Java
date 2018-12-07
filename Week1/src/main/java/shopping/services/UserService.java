@@ -22,7 +22,7 @@ public class UserService {
         
         //User CRUD
         public User getUserById(long id) {
-            User user = userRepo.findById(id);
+            User user = this.userRepo.findById(id).get();
             if(user!=null){
                 return user;
             }
@@ -30,7 +30,7 @@ public class UserService {
         }
         
         public List<User> getUsers(){
-            return userRepo.findAll();
+            return (List<User>)this.userRepo.findAll();
         }
         @Transactional
         public User addNewUser(User user) {
@@ -44,7 +44,7 @@ public class UserService {
         public User deleteUser(long id) {    
             
             if(userRepo.existsById(id))  {
-              User user =userRepo.findById(id);
+              User user =this.userRepo.findById(id).get();
               userRepo.delete(user);
               return user;
             }
@@ -57,7 +57,7 @@ public class UserService {
         public User editUser(long id,User user){
             
             if(userRepo.existsById(id))  {
-                User oldUser =userRepo.findById(id);
+                User oldUser =this.userRepo.findById(id).get();
                 userRepo.delete(oldUser);
             return user;
             }

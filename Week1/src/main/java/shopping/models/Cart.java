@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 @Entity
@@ -23,7 +21,7 @@ public class Cart {
     @OneToOne
     @JoinColumn(name="user_id")
     private User user;
-    @ManyToMany
+    @OneToMany
     private List<CartElement> shopList;
    
     public Cart(){
@@ -74,6 +72,11 @@ public class Cart {
        }
         return null;
         
+    }
+
+    public CartElement deleteElement(CartElement element){
+        this.shopList.remove(element);
+        return element;
     }
 
 

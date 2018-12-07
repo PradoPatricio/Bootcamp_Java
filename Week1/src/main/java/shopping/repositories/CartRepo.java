@@ -8,8 +8,6 @@ import shopping.models.Cart;
 
 
 @Component
-public interface CartRepo extends CrudRepository<Cart, Integer> {
-    List<Cart> findAll();
-    Cart findById(Long id);
-    Boolean existsById(Long id);
+public interface CartRepo extends CrudRepository<Cart, Long> {
+    
 }

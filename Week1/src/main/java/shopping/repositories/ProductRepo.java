@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import shopping.models.Product;
 
 @Component
-public interface ProductRepo extends CrudRepository<Product, Integer> {
-    List<Product> findAll();    
-    Product findById(Long id);
-    Boolean existsById(Long id);
+public interface ProductRepo extends CrudRepository<Product, Long> {
+    
 }

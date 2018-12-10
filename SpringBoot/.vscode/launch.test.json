@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "ShopingCart",
+                "projectName": "ShopingCart",
+                "workingDirectory": "c:\\Bootcamp_Java\\Week1",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "ShopingCart",
+                "projectName": "ShopingCart",
+                "workingDirectory": "c:\\Bootcamp_Java\\Week1",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}

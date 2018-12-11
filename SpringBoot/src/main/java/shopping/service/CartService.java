@@ -40,11 +40,9 @@ public class CartService {
            return (List<Cart>)this.cartRepo.findAll();           
         }
 
-        public Cart addNewCart(Cart cart) {
-                if (cart == null) {
-                    cart=new Cart();                
-                }
-                return this.cartRepo.save(cart);	               
+        public Cart addNewCart() {               
+            Cart cart=new Cart();                
+            return this.cartRepo.save(cart);	               
             }   
 
         public Cart deleteCart(long id) {

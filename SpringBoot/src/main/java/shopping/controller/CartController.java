@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -54,8 +53,8 @@ public class CartController {
     }
 
     @PostMapping("/carts")                                             //new cart
-    public CartDto newCart(@RequestBody CartDto cartDto){ 
-        Cart newCart=cart_s.addNewCart(convertToEntity(cartDto));
+    public CartDto newCart(){ 
+        Cart newCart=cart_s.addNewCart();
         return convertToDto(newCart);
     }
    

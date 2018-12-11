@@ -1,12 +1,12 @@
 package shopping.dto;
 
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class CartElementDto {
    
     private Long id;
     private ProductDto product;
+    @JsonIgnore
     CartDto cart;    
     private int quantity;
  
@@ -47,6 +47,7 @@ public class CartElementDto {
     public void setCart(CartDto cart){
         this.cart=cart;
     }
+    @JsonIgnore
     public CartDto getCart(){
         return cart;
     }

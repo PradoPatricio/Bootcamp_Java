@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
-public class CartElement {
+public class Item {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="element_id")
@@ -27,10 +27,10 @@ public class CartElement {
     private int quantity;
  
 
-    public CartElement(){
+    public Item(){
 
     }
-    public CartElement(Product product, int quantity) {
+    public Item(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }

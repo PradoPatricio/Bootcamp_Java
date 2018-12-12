@@ -25,7 +25,7 @@ public class UserService {
             if(user!=null){
                 return user;
             }
-            throw new RuntimeException("Invalid user Id");
+            throw new IllegalArgumentException("Invalid user Id");
         }
         
         public List<User> getUsers(){
@@ -35,7 +35,7 @@ public class UserService {
             if (user != null) {
                 return userRepo.save(user);	             
             }
-            throw new RuntimeException("Invalid user:null");
+            throw new IllegalArgumentException("Invalid user:null");
         }
         public User deleteUser(long id) {    
 
@@ -45,7 +45,7 @@ public class UserService {
                return user;
             }
             else{
-                throw new RuntimeException("Invalid user Id");
+                throw new IllegalArgumentException("Invalid user Id");
             }
             
             
@@ -58,11 +58,11 @@ public class UserService {
                   return user;
                  }
               else{
-                 throw new RuntimeException("Invalid user Id");
+                 throw new IllegalArgumentException("Invalid user Id");
                  }      
              }
              else{
-                throw new RuntimeException("Invalid user:null");
+                throw new IllegalArgumentException("Invalid user:null");
              }
          }
 }

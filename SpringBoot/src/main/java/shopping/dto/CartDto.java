@@ -8,7 +8,7 @@ import java.util.List;
 public class CartDto {   
     private Long id;   
     private UserDto user;  
-    private List<CartElementDto> shopList;
+    private List<ItemDto> shopList;
    
     public CartDto(){
         
@@ -32,10 +32,10 @@ public class CartDto {
     public UserDto getUser(){
         return user;
     }
-    public void setShopList(List<CartElementDto> shopList){
+    public void setShopList(List<ItemDto> shopList){
         this.shopList=shopList;
     }
-    public List<CartElementDto> getShopList(){
+    public List<ItemDto> getShopList(){
         return shopList;
     }
 

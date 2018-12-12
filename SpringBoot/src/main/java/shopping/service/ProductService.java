@@ -20,7 +20,7 @@ public class ProductService {
         if(this.productRepo.existsById(id))  {
             return this.productRepo.findById(id).get();
         }
-        throw new RuntimeException("Invalid product Id");
+        throw new IllegalArgumentException("Invalid product Id");
     }
     
     public List<Product> getProducts() {		
@@ -31,7 +31,7 @@ public class ProductService {
         if (product != null) {
             return this.productRepo.save(product);	         
         }        
-        throw new RuntimeException("Invalid product : null");
+        throw new IllegalArgumentException("Invalid product : null");
     }
        
     
@@ -42,7 +42,7 @@ public class ProductService {
             this.productRepo.delete(product);
             return product;
         }       
-        throw new RuntimeException("Invalid product Id");        
+        throw new IllegalArgumentException("Invalid product Id");        
     }
 
     public Product editProduct(long id,Product product){       
@@ -52,9 +52,9 @@ public class ProductService {
                   this.productRepo.delete(oldProduct);
                   return this.productRepo.save(product);
                 }
-                throw new RuntimeException("Invalid product : null");
+                throw new IllegalArgumentException("Invalid product : null");
             }            
-            throw new RuntimeException("Invalid product Id");
+            throw new IllegalArgumentException("Invalid product Id");
             }
         
         

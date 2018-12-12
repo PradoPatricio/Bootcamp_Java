@@ -1,9 +1,9 @@
 package shopping.repository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
-import shopping.model.CartElement;
+import shopping.model.Item;
 
 
 @Component
-public interface ElementRepo extends CrudRepository<CartElement, Long> {
+public interface ItemRepo extends CrudRepository<Item, Long> {
 }

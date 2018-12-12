@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import shopping.model.CartElement;
+import shopping.model.Item;
 import shopping.service.CartService;
 import shopping.dto.CartDto;
-import shopping.dto.CartElementDto;
+import shopping.dto.ItemDto;
 import shopping.dto.UserDto;
 import shopping.model.Cart;
 
@@ -30,8 +30,8 @@ public class CartController {
 
     //Cart mapping
     @GetMapping("/carts/{id}")
-    public List<CartElementDto> getCartElements(@PathVariable("id") Long Id){
-        return convertToDtoElement(cart_s.getCartElements(Id)); 
+    public List<ItemDto> getItems(@PathVariable("id") Long Id){
+        return convertToDtoItem(cart_s.getItems(Id)); 
     }
     
 
@@ -74,19 +74,19 @@ public class CartController {
     }
     */
 
-    //Elements Mapping
+    //Items Mapping
 
     
    
-    @DeleteMapping("/carts/{c_id}/elements/{e_id}")
-    public CartElementDto removeElementFromCart(@PathVariable("c_id") Long  CartId,@PathVariable("e_id")Long ElementId ){
-        return convertToDto(cart_s.removeElementFromCart(CartId,ElementId));
+    @DeleteMapping("/carts/{c_id}/items/{e_id}")
+    public ItemDto removeItemFromCart(@PathVariable("c_id") Long  CartId,@PathVariable("e_id")Long ItemId ){
+        return convertToDto(cart_s.removeItemFromCart(CartId,ItemId));
     }
         
    
-    @PutMapping("/carts/{c_id}/elements/{p_id}/{quantity}")
-    public CartElement addElementToCart(@PathVariable("c_id") Long CartId,@PathVariable("p_id")Long  ProductId,@PathVariable("quantity") int quantity){
-        return cart_s.addElementToCart(CartId, ProductId, quantity);
+    @PutMapping("/carts/{c_id}/items/{p_id}/{quantity}")
+    public Item addItemToCart(@PathVariable("c_id") Long CartId,@PathVariable("p_id")Long  ProductId,@PathVariable("quantity") int quantity){
+        return cart_s.addItemToCart(CartId, ProductId, quantity);
              
     }
 
@@ -104,18 +104,16 @@ public class CartController {
         return dtoList ;        
     }
     
-    private Cart convertToEntity(CartDto cartDto) {
-        return modelMapper.map(cartDto, Cart.class);         
-    }
+    
 
-    private CartElementDto convertToDto(CartElement element) {
-        return  modelMapper.map(element, CartElementDto.class);
+    private ItemDto convertToDto(Item item) {
+        return  modelMapper.map(item, ItemDto.class);
         
     }
-    private List<CartElementDto> convertToDtoElement(List<CartElement> elements) {
-        List<CartElementDto> dtoList=new ArrayList<CartElementDto>();
-        for (CartElement element : elements) {
-            dtoList.add(convertToDto(element));
+    private List<ItemDto> convertToDtoItem(List<Item> items) {
+        List<ItemDto> dtoList=new ArrayList<ItemDto>();
+        for (Item item : items) {
+            dtoList.add(convertToDto(item));
         }
         return dtoList ;        
     }

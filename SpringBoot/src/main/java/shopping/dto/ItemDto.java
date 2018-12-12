@@ -2,7 +2,7 @@ package shopping.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class CartElementDto {
+public class ItemDto {
    
     private Long id;
     private ProductDto product;
@@ -11,10 +11,10 @@ public class CartElementDto {
     private int quantity;
  
 
-    public CartElementDto(){
+    public ItemDto(){
 
     }
-    public CartElementDto(ProductDto product, int quantity,Long id,CartDto cart) {
+    public ItemDto(ProductDto product, int quantity,Long id,CartDto cart) {
         this.id=id;
         this.product = product;
         this.quantity = quantity;

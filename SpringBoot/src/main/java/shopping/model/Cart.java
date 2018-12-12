@@ -23,7 +23,7 @@ public class Cart {
     @JoinColumn(name="user_id")
     private User user;
     @OneToMany
-    private List<CartElement> shopList;
+    private List<Item> shopList;
    
     public Cart(){
         
@@ -47,26 +47,26 @@ public class Cart {
     public User getUser(){
         return user;
     }
-    public void setShopList(List<CartElement> shopList){
+    public void setShopList(List<Item> shopList){
         this.shopList=shopList;
     }
-    public List<CartElement> getShopList(){
+    public List<Item> getShopList(){
         return shopList;
     }
    
 
 	
-    public CartElement addToCart(CartElement element) {
+    public Item addToCart(Item item) {
 		if (shopList == null) {
-			shopList = new ArrayList<CartElement>();
+			shopList = new ArrayList<Item>();
 		}
-        shopList.add(element);
-        return element;
+        shopList.add(item);
+        return item;
     }
-    public CartElement deleteElement(long id){
-        for (CartElement x : shopList) {
+    public Item deleteItem(long id){
+        for (Item x : shopList) {
             if (x.getId()==id) {
-                CartElement deleted =x;
+                Item deleted =x;
                 shopList.remove(x);   
                 return deleted;             
             }
@@ -75,9 +75,9 @@ public class Cart {
         
     }
 
-    public CartElement deleteElement(CartElement element){
-        this.shopList.remove(element);
-        return element;
+    public Item deleteItem(Item item){
+        this.shopList.remove(item);
+        return item;
     }
 
 

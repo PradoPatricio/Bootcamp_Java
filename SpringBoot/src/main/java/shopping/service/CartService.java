@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import shopping.model.Product;
 import shopping.model.User;
 import shopping.repository.CartRepo;
-import shopping.repository.ElementRepo;
+import shopping.repository.ItemRepo;
 import shopping.repository.ProductRepo;
 import shopping.repository.UserRepo;
-import shopping.model.CartElement;
+import shopping.model.Item;
 import shopping.model.Cart;    
 
 @Service
@@ -23,7 +23,7 @@ public class CartService {
         @Autowired
         UserRepo userRepo;
         @Autowired
-        ElementRepo elementRepo;
+        ItemRepo itemRepo;
         @Autowired
         ProductRepo productRepo;
       
@@ -33,7 +33,7 @@ public class CartService {
             if(this.cartRepo.existsById(id)){
                 return this.cartRepo.findById(id).get();
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
         }
 
         public List<Cart> getCarts(){           
@@ -51,7 +51,7 @@ public class CartService {
                 this.cartRepo.delete(cart);
                 return cart;
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
         }
 
 
@@ -62,60 +62,60 @@ public class CartService {
                     myCart.setUser(userRepo.findById(userId).get());
                     return this.cartRepo.save(myCart);       
                 }   
-                throw new RuntimeException("Invalid user Id");                     
+                throw new IllegalArgumentException("Invalid user Id");                     
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
         }
 
         public User getCartUser(Long id){
             if (this.cartRepo.existsById(id)){
                 return this.cartRepo.findById(id).get().getUser();
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
         }
 
 
-        //Cart elements CRUD
-        public List<CartElement> getCartElements(Long id) {		           
+        //Cart items CRUD
+        public List<Item> getItems(Long id) {		           
             if (this.cartRepo.existsById(id)){
                 return this.cartRepo.findById(id).get().getShopList();
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
         }
            
-        public CartElement addElementToCart(Long cartId,Long productId, int quantity){    
+        public Item addItemToCart(Long cartId,Long productId, int quantity){    
 
             if(this.cartRepo.existsById(cartId)){   
                 if(this.productRepo.existsById(productId)){
                     Product product=this.productRepo.findById(productId).get();          
-                    CartElement newCartElement=new CartElement(product,quantity);
+                    Item newItem=new Item(product,quantity);
                     Cart myCart= this.cartRepo.findById(cartId).get();
-                    newCartElement.setCart(myCart);
-                    newCartElement=this.elementRepo.save(newCartElement);
-                    myCart.addToCart(newCartElement);
+                    newItem.setCart(myCart);
+                    newItem=this.itemRepo.save(newItem);
+                    myCart.addToCart(newItem);
                     this.cartRepo.save(myCart);       
-                    return newCartElement;
+                    return newItem;
                 }   
-                throw new RuntimeException("Invalid product Id");
+                throw new IllegalArgumentException("Invalid product Id");
             }
-            throw new RuntimeException("Invalid cart Id");
+            throw new IllegalArgumentException("Invalid cart Id");
                
                      
         }
             
         
-        public CartElement removeElementFromCart(long cartId,long elementId){
+        public Item removeItemFromCart(long cartId,long itemId){
             if(this.cartRepo.existsById(cartId)){   
-                if(this.productRepo.existsById(elementId)){
-                    CartElement deleted=this.elementRepo.findById(cartId).get();
+                if(this.productRepo.existsById(itemId)){
+                    Item deleted=this.itemRepo.findById(cartId).get();
                     Cart cart=this.cartRepo.findById(cartId).get();
-                    cart.deleteElement(deleted);
-                    this.elementRepo.delete(deleted);
+                    cart.deleteItem(deleted);
+                    this.itemRepo.delete(deleted);
                     this.cartRepo.save(cart);
                     return deleted;
                 }     
-                throw new RuntimeException("Invalid element Id");     
+                throw new IllegalArgumentException("Invalid item Id");     
             }  
-            throw new RuntimeException("Invalid cart Id");     
+            throw new IllegalArgumentException("Invalid cart Id");     
         }
 }
